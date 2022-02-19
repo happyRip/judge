@@ -3,7 +3,13 @@ on:
   push:
     paths:
       - '**.go'
+      - '.github/workflows/test.yml'
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
   run-go-test:
     runs-on: ubuntu-latest
     steps:
@@ -12,4 +18,5 @@ jobs:
         with:
           go-version: '1.17'
       - run: go mod tidy
-      - run: go test ./...
+      - id: test
+        run: go test ./...
