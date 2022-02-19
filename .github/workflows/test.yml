@@ -10,10 +10,7 @@ jobs:
     steps:
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - run: |
-        for file in ${{ steps.files.outputs.all }}; do
-          echo "file: $file"
-        done
+      - run: for file in ${{ steps.files.outputs.all }}; do; echo $file; done
   run-go-test:
     runs-on: ubuntu-latest
     steps:
