@@ -8,8 +8,8 @@ jobs:
   list-changed-files:
     runs-on: ubuntu-latest
     outputs:
-      changed-files: ${{ steps.changed.outputs.changed}}
-      changed-count: ${{ steps.count.outputs.count}}
+      changed-files: ${{ steps.changed.outputs.changed-files}}
+      changed-count: ${{ steps.count.outputs.changed-count}}
     steps:
       - name: Get a list of changed files
         id: files
@@ -17,16 +17,17 @@ jobs:
       - name: Generate a list of changed files
         id: changed
         run: |
-          echo "::set-output name=changed::$(echo \"${{ steps.files.outputs.all }}\")"
+          echo "::set-output name=changed-files::$(echo \"${{ steps.files.outputs.all }}\")"
       - name: Generate a count of changed `*.go` files
         id: count
         run: |
-          echo "::set-output name=count::$(echo \"${{ env.CHANGED }}\" |
+          echo "::set-output name=changed-count::$(echo \"${{ env.CHANGED }}\" |
           xargs -n 1 |
           grep -c \".*\")"
       - name: Print step outputs
         run: |
-          echo ${{ steps.*.outputs.* }}
+          echo ${{ steps.changed.outputs.changed-files }}
+          echo ${{ steps.count.outputs.changed-count }}
           
   run-go-test:
     runs-on: ubuntu-latest
