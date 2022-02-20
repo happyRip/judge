@@ -11,13 +11,12 @@ jobs:
       - name: Get a list of changed files
         id: files
         uses: jitterbit/get-changed-files@v1
-      - name: Count changed `*.go` files
+      - name: List and count changed `*.go` files
         run: |
-          echo "CHANGED=$(echo \"${{ steps.files.outputs.all }}\" |
+          CHANGED=$(echo "${{ steps.files.outputs.all }}" |
           xargs -n 1 |
-          grep -c \"\.go$\")" >> GITHUB_ENV
-      - name: Test variable assign
-        run: echo ${{ env.CHANGED }}
+          grep -c ".*")
+          echo $CHANGED
           
   run-go-test:
     runs-on: ubuntu-latest
