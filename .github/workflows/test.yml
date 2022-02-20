@@ -17,7 +17,7 @@ jobs:
       - name: Generate a list of changed files
         id: changed
         run: |
-          echo "::set-output name=changed::$(echo \"${{ steps.files.outputs.all }}\"
+          echo "::set-output name=changed::$(echo \"${{ steps.files.outputs.all }}\")"
       - name: Generate a count of changed `*.go` files
         id: count
         run: |
