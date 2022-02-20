@@ -16,9 +16,9 @@ jobs:
       - run: go test ./...
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - id: array
+      - run: files=("${{ steps.files.outputs.all }}")
+      - id: loop
         run: |
-          files=("${{ steps.files.outputs.all }}")
           for f in ${files[@]}; do
             echo "${f}"
           done
