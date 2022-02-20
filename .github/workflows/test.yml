@@ -16,14 +16,9 @@ jobs:
       - run: go test ./...
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - id: loop
-        run: |
-          for file in ("${{ steps.files.outputs.all }}", ); do
-            echo "${file}"
-          done
       - id: array
         run: |
-          FILES=("${{ steps.files.outputs.all }}")
-          for file in ${FILES[@]}; do
-            echo "${file}"
+          files=("${{ steps.files.outputs.all }}")
+          for f in ${files[@]}; do
+            echo "${f}"
           done
