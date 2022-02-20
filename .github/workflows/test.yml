@@ -16,7 +16,7 @@ jobs:
       - run: go test ./...
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - run: files=("${{ steps.files.outputs.all }}")
+      - run: echo "files=(\"${{ steps.files.outputs.all }}\")" >> $GITHUB_ENV
       - id: loop
         run: |
           for f in ${files[@]}; do
