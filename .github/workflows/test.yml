@@ -13,8 +13,8 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - id: dirs
         run: |
-          if printf -- '%s\n' "${{ steps.files.outputs.all }}" | grep "\.go$"; then
-            printf -- '%s\n' "${{ steps.files.outputs.all }}"
+          if echo "${{ steps.files.outputs.all }}" | tr " " "\n" | grep "\.go$"; then
+            echo 'Success'
           else
             echo 'No `*.go` files changed.'
           fi
