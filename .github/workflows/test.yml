@@ -22,3 +22,6 @@ jobs:
           for f in ${files[@]}; do
             echo "${f}"
           done
+      - id: grep
+        run: |
+          echo ${files[@]} | grep '\.go$'
