@@ -22,6 +22,4 @@ jobs:
           for f in ${files[@]}; do
             echo "${f}"
           done
-      - id: grep
-        run: |
-          echo ${files[@]} | grep '\.go$'
+      - run: printf -- '%s\n' "${files[@]}" | grep '\.go$'
