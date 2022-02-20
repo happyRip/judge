@@ -13,7 +13,12 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - id: dirs
         run: |
-          printf -- '%s\n' "${{ steps.files.outputs.all }}"
+          if printf -- '%s\n' "${{ steps.files.outputs.all }}" | grep "\.go$"; then
+            printf -- '%s\n' "${{ steps.files.outputs.all }}"
+          else
+            echo 'No `*.go` files changed.'
+          fi
+          
       - uses: actions/setup-go@v2
         with:
           go-version: '1.17'
