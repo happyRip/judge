@@ -16,7 +16,9 @@ jobs:
           CHANGED=$(echo "${{ steps.files.outputs.all }}" |
           xargs -n 1 |
           grep -c ".*")
-          echo $CHANGED
+          echo "CHANGED=$CHANGED" >> GITHUB_ENV
+      - run: echo $CHANGED
+      - run: echo ${{ env.CHANGED }}
           
   run-go-test:
     runs-on: ubuntu-latest
