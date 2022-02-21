@@ -40,9 +40,9 @@ jobs:
           grep '\.go$' |
           sort -u |
           rev | cut -d '/' -f 2- | rev |
-          sed 's:.*:./&:') |
+          sed 's:.*:./&:' |
           tr '\n' ' ' |
-          sed 's/\s$/\n/"
+          sed 's/\s$/\n/')"
       - name: Print step outputs
         run: |
           echo ${{ steps.dirs.outputs.changed-dirs }}
