@@ -38,7 +38,9 @@ jobs:
           echo ${{ needs.list-changed-files.outputs.changed-files }} |
           xargs -n 1 |
           grep '\.go$' |
-          sort -u
+          sort -u |
+          rev | cut -d '/' -f 2- | rev |
+          sed 's:.*:./&:'
       # - name: Print step outputs
       #   run: |
       #     echo ${{ steps.dirs.outputs.changed-dirs }}
