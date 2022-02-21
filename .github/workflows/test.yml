@@ -38,9 +38,7 @@ jobs:
           echo "::set-output name=changed-dirs::$(echo \"${{ needs.list-changed-files.outputs.changed-files }}\" |
           xargs -n 1 |
           grep '\.go$' |
-          sort -u |
-          # rev | cut -d '/' -f 2- | rev |
-          # sed 's:.*:./&:')"
+          sort -u)"
       - name: Print step outputs
         run: |
           echo ${{ steps.dirs.outputs.changed-dirs }}
