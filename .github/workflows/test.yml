@@ -35,13 +35,13 @@ jobs:
       - name: Get changed `*.go` files list
         id: dirs
         run: |
-          echo "::set-output name=changed-dirs::$(echo \"${{ needs.list-changed-files.outputs.changed-files }}\" |
+          echo ${{ needs.list-changed-files.outputs.changed-files }} |
           xargs -n 1 |
           grep '\.go$' |
-          sort -u)"
-      - name: Print step outputs
-        run: |
-          echo ${{ steps.dirs.outputs.changed-dirs }}
+          sort -u"
+      # - name: Print step outputs
+      #   run: |
+      #     echo ${{ steps.dirs.outputs.changed-dirs }}
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Setup work node
