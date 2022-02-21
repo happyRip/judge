@@ -24,7 +24,7 @@ jobs:
         run: |
           echo "::set-output name=changed-count::$(echo \"${{ env.CHANGED }}\" |
           xargs -n 1 |
-          grep -c \".*\")"
+          grep -c '\.go$')"
       - name: Print step outputs
         run: |
           echo ${{ steps.changed.outputs.changed-files }}
