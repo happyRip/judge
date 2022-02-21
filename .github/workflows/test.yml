@@ -38,11 +38,12 @@ jobs:
     steps:
       - name: Get changed `*.go` files list
         run: |
-          echo "${{ needs.list-changed-files.outputs.changed-files }}" |
+          echo "changed-dirs=$(echo \"${{ needs.list-changed-files.outputs.changed-files }}\" |
           xargs -n 1 |
-          grep "\.go$" |
-          grep -v "_test\.go$" |
-          sort -u
+          grep '\.go$' |
+          sort -u |
+          dirname)" >> $GITHUB_ENV
+          echo ${env.changed-dirs[@]}
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Setup work node
@@ -52,4 +53,4 @@ jobs:
       - name: Run tests
         run: |
           go mod tidy
-          go test ./...
+          go test ${env.changed-dirs[@]}
