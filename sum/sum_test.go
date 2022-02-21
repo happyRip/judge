@@ -26,7 +26,7 @@ func TestSum(t *testing.T) {
 			want += v
 		}
 		if got := Sum(toAdd...); want != got {
-			t.Fatalf("Sum test failed for input: %v", toAdd)
+			t.Fatalf("Sum test failed with input: %v", toAdd)
 		}
 	}
 }
