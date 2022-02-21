@@ -38,7 +38,7 @@ jobs:
     steps:
       - name: Get changed `*.go` files list
         run: |
-          echo "${{ needs.list-changed-files.outputs.changed.files }}" |
+          echo "${{ needs.list-changed-files.outputs.changed-files }}" |
           xargs -n 1 |
           grep "\.go$" |
           grep -v "_test\.go$" |
