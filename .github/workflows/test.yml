@@ -37,13 +37,13 @@ jobs:
     if: needs.list-changed-files.outputs.changed-count > 0
     steps:
       - name: Get changed `*.go` files list
+        id: dirs
         run: |
-          echo "changed-dirs=$(echo \"${{ needs.list-changed-files.outputs.changed-files }}\" |
+          echo "::set-output name=changed-dirs::$(echo \"${{ needs.list-changed-files.outputs.changed-files }}\" |
           xargs -n 1 |
           grep '\.go$' |
           sort -u |
-          cut -d "/" -f 1-)" >> $GITHUB_ENV
-          echo ${env.changed-dirs[@]}
+          cut -d "/" -f 1-)"
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Setup work node
@@ -53,4 +53,4 @@ jobs:
       - name: Run tests
         run: |
           go mod tidy
-          go test ${env.changed-dirs[@]}
+          go test ${{ steps.dirs.outputs.changed-dirs }}
