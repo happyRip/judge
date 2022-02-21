@@ -22,7 +22,7 @@ jobs:
       - name: Generate a count of changed `*.go` files
         id: count
         run: |
-          echo "::set-output name=changed-count::$(echo \"${{ env.CHANGED }}\" |
+          echo "::set-output name=changed-count::$(echo \"${{ steps.files.outputs.all }}\" |
           xargs -n 1 |
           grep -c '\.go$')"
       - name: Print step outputs
