@@ -39,7 +39,8 @@ jobs:
           xargs -n 1 |
           grep '\.go$' |
           sort -u |
-          cut -d "/" -f 1-)"
+          rev | cut -d '/' -f 2- | rev |
+          sed 's:.*:./:')"
       - name: Print step outputs
         run: |
           echo ${{ steps.dirs.outputs.changed-dirs }}
