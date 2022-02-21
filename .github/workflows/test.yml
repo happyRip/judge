@@ -9,17 +9,13 @@ jobs:
     name: Prepare list of changed files
     runs-on: ubuntu-latest
     outputs:
-      changed-files: ${{ steps.changed.outputs.changed-files}}
-      changed-count: ${{ steps.count.outputs.changed-count}}
+      changed-files: ${{ steps.files.outputs.all }}
+      changed-count: ${{ steps.count.outputs.changed-count }}
     steps:
       - name: Get a list of changed files
         id: files
         uses: jitterbit/get-changed-files@v1
-      - name: Generate a list of changed files
-        id: changed
-        run: |
-          echo "::set-output name=changed-files::$(echo \"${{ steps.files.outputs.all }}\")"
-      - name: Generate a count of changed `*.go` files
+      - name: Count changed `*.go` files
         id: count
         run: |
           echo "::set-output name=changed-count::$(echo \"${{ steps.files.outputs.all }}\" |
@@ -27,7 +23,7 @@ jobs:
           grep -c '\.go$')"
       - name: Print step outputs
         run: |
-          echo ${{ steps.changed.outputs.changed-files }}
+          echo ${{ steps.files.outputs.all }}
           echo ${{ steps.count.outputs.changed-count }}
           
   run-go-test:
@@ -44,6 +40,9 @@ jobs:
           grep '\.go$' |
           sort -u |
           cut -d "/" -f 1-)"
+      - name: Print step outputs
+        run: |
+          echo ${{ steps.dirs.outputs.changed-dirs }}
       - name: Checkout the repository
         uses: actions/checkout@v2
       - name: Setup work node
