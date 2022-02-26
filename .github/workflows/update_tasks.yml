@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - '**.md'
+      - '.github/workflows/update_tasks.yml'
+      - '.github/actions/update_tasks/**'
 
 jobs:
   get-task-data:
