@@ -4,5 +4,4 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN ls -A
-ENTRYPOINT [ "python", "tasks.py" ]
+CMD [ "python", "tasks.py" ]
