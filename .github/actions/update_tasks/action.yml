@@ -1,0 +1,11 @@
+name: Update tasks
+description: Appends list of available tasks and their description to Tasks section in main readme file.
+author: happyRip
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: edit
+  color: black

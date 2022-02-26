@@ -1,9 +1,10 @@
-name: run-go-test
+name: Run tests
 on:
   push:
     paths:
       - '**.go'
       - '.github/workflows/test.yml'
+
 jobs:
   list-changed-files:
     name: Prepare list of changed files

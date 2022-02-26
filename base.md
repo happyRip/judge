@@ -4,9 +4,6 @@ Proof of concep online judge hosted with GitHub Actions.
 
 ## Tasks
 
-- [ ] [Hello, world!](https://github.com/happyRip/judge/tree/master/hello-world) - sample task
-    - [solution](https://github.com/happyRip/judge/tree/master/hello-world/hello-world.go)
-
 ## Instructions
 
 To test your solutions:
