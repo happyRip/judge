@@ -11,6 +11,8 @@ RUN apt-get update && \
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
+RUN pip install --upgrade pip
+
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
@@ -27,4 +29,4 @@ RUN apt-get update && \
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
-ENTRYPOINT [ "python", "./tasks.py" ]
+ENTRYPOINT [ "python", "tasks.py" ]
