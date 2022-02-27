@@ -29,4 +29,4 @@ RUN apt-get update && \
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
-ENTRYPOINT [ "python", "tasks.py" ]
+ENTRYPOINT [ "python", "../..//home/runner/work/judge/judge/tasks.py" ]
