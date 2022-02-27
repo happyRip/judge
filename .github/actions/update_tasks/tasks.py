@@ -2,8 +2,14 @@
 
 import os
 import re
+import git
 import pandoc
 from pandoc import types
+
+
+def get_git_root(path:str) -> str:
+    git_repo = git.Repo(path, search_parent_directories=True)
+    return git_repo.git.rev_parse('--show-toplevel')
 
 
 def get_all_task_docs_paths(root:str='.', name:str='README.md') -> list[str]:
@@ -35,7 +41,7 @@ def path_to_link(path:str, repository:str='github.com/happyRip/judge', branch:st
     return 'https://{}/tree/{}/{}'.format(
         repository,
         branch,
-        os.path.dirname(os.path.relpath(path, os.getcwd()))
+        os.path.dirname(os.path.relpath(path, get_git_root(os.getcwd())))
     )
 
 
