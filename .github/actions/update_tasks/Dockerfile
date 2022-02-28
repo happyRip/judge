@@ -29,6 +29,5 @@ RUN apt-get update && \
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY tasks.py .
-RUN head /github/workspace/tasks.py
+ADD tasks.py /github/workspace/
 ENTRYPOINT [ "python", "/github/workspace/tasks.py" ]
