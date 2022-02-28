@@ -46,7 +46,7 @@ def path_to_link(path:str, repository:str='github.com/happyRip/judge', branch:st
 def task_data_to_markdown(task_data:map) -> str:
     tasks_md = ''
     for path, values in task_data.items():
-        tasks_md += '- [{}]({}) - {}\n\n'.format(
+        tasks_md += '- [ ] [{}]({}) - {}\n\n'.format(
             values['name'],
             path_to_link(path),
             values['description'])
