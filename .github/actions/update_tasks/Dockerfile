@@ -24,9 +24,10 @@ COPY --from=builder /opt/venv /opt/venv
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git pandoc
+    apt-get install -y --no-install-recommends git pandoc tree
 
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
+RUN pwd && ls -A && tree 
 ENTRYPOINT [ "python", "tasks.py" ]
