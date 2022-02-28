@@ -31,11 +31,11 @@ jobs:
         git config --local user.email "${{ github.actor }}@users.noreply.github.com"
         git config --local user.name "${{ github.actor }}"
         git add README.md && git add --renormalize README.md
-        git pull origin ${{ github.head_ref }} --autostash --rebase -X ours
+        git pull origin ${{ github.ref }} --autostash --rebase -X ours
         git commit --allow-empty -am "AUTO-GH ACTION: ${{ github.workflow }}"
         NO_PAGER=1 git --no-pager diff HEAD^
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: ${{ github.head_ref }}
+        branch: ${{ github.ref }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
