@@ -1,9 +1,9 @@
 name: Prepare environment
 desctiption: Prepare environment for `update_tasks.yml` workflow.
-runs:
-  env: 
+env: 
     ACTION_FOLDER: .github/actions/update_tasks
-  using: composite
+runs:
+  using: "composite"
   steps:
     - name: Setup python environment
       uses: actions/setup-python@v2
