@@ -20,14 +20,7 @@ jobs:
     - name: Get task data
       run: python ${{ steps.setup-environment.outputs.script-folder }}/tasks.py
     - name: Commit README.md
-      run: |
-        git config --local core.autocrlf false
-        git config --local user.email "${{ github.actor }}@users.noreply.github.com"
-        git config --local user.name "${{ github.actor }}"
-        git add README.md && git add --renormalize README.md
-        git pull origin ${{ github.ref }} --autostash --rebase -X ours
-        git commit --allow-empty -am "AUTO-GH ACTION: ${{ github.workflow }}"
-        NO_PAGER=1 git --no-pager diff HEAD^
+      uses: ./.github/actions/update_tasks/commit_readme
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
