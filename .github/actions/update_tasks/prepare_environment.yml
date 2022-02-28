@@ -1,0 +1,18 @@
+name: Prepare environment
+desctiption: Prepare environment for `update_tasks.yml` workflow.
+runs:
+  env: 
+    ACTION_FOLDER: .github/actions/update_tasks
+  using: composite
+  steps:
+    - name: Setup python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+        cache: 'pip'
+    - name: Install python dependencies
+      run: pip install -r $ACTION_FOLDER/requirements.txt
+    - name: Setup pandoc
+      uses: r-lib/actions/setup-pandoc@v1
+    - run: ln -s $ACTION_FOLDER/tasks.py .

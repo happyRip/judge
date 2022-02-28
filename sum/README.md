@@ -1,3 +1,3 @@
 # Sum
 
-Test task with random tests
+Test task with random tests.
