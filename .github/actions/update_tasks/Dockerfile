@@ -30,6 +30,7 @@ RUN apt-get update && \
 ENV PATH="/opt/venv/bin:$PATH"
 
 ADD tasks.py /github/workspace/
-RUN pwd && \
+RUN chmod +x tasks.py && \
+    pwd && \
     ls -lA
 ENTRYPOINT [ "python", "/github/workspace/tasks.py" ]
