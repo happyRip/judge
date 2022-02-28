@@ -4,7 +4,7 @@ on:
     paths:
       - '**.md'
       - '.github/workflows/update_tasks.yml'
-      - '.github/actions/update_tasks/**'
+      - 'tasks.py'
 
 jobs:
   get-task-data:
