@@ -30,4 +30,4 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
 RUN pwd && ls -A && tree 
-ENTRYPOINT [ "python", "tasks.py" ]
+ENTRYPOINT [ "tasks.py" ]
