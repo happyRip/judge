@@ -29,5 +29,4 @@ RUN apt-get update && \
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
-RUN cd /home/runner/work/judge/judge/.github/actions/update_tasks
 ENTRYPOINT [ "python", "tasks.py" ]
