@@ -15,7 +15,7 @@ jobs:
       with:
         ref: ${{ github.ref }}
     - name: Setup environment
-      uses: .github/actions/update_tasks/prepare_environment
+      uses: ./.github/actions/update_tasks/prepare_environment
     - name: Get task data
       run: python tasks.py
     - name: Commit README.md
