@@ -1,7 +1,10 @@
 name: Prepare environment
 desctiption: Prepare environment for `update_tasks.yml` workflow.
-env: 
-    ACTION_FOLDER: .github/actions/update_tasks
+inputs:
+  action-root-folder:
+    descritpion: Root path of composite action folder
+    required: false
+    default: .github/actions/update_tasks
 runs:
   using: "composite"
   steps:
@@ -12,7 +15,7 @@ runs:
         architecture: 'x64'
         cache: 'pip'
     - name: Install python dependencies
-      run: pip install -r ${{ env.ACTION_FOLDER }}/requirements.txt
+      run: pip install -r ${{ inputs.action-root-folder }}/requirements.txt
       shell: bash
     - name: Setup pandoc
       uses: r-lib/actions/setup-pandoc@v1
