@@ -27,6 +27,7 @@ RUN apt-get update && \
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
-RUN pwd && ls -lA && tree ..
+RUN pwd && ls -lA && tree ../..
+RUN chmod +x tasks.py
+RUN ./tasks.py
 ENTRYPOINT [ "python", "tasks.py" ]
-RUN pwd && ls -lA && tree ..
