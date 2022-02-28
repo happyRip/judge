@@ -26,7 +26,7 @@ def get_task_docs_data(file:str) -> map:
     for elt in pandoc.iter(content):
         if isinstance(elt, types.Header):
             if not 'name' in data:
-                data['name'] = pandoc.write(elt).lstrip('#').strip()
+                data['name'] = pandoc.write(elt).lstrip('#').rstrip('=').strip()
         elif isinstance(elt, types.Para):
             if not 'description' in data:
                 data['description'] = pandoc.write(elt).strip()
