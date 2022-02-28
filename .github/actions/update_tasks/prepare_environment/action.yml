@@ -13,6 +13,8 @@ runs:
         cache: 'pip'
     - name: Install python dependencies
       run: pip install -r $ACTION_FOLDER/requirements.txt
+      shell: bash
     - name: Setup pandoc
       uses: r-lib/actions/setup-pandoc@v1
     - run: ln -s $ACTION_FOLDER/tasks.py .
+      shell: bash
