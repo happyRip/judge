@@ -56,12 +56,10 @@ jobs:
         id: run-go-tests
         run: |
           go mod tidy
-          PASSED=$(go test ${{ steps.dirs.outputs.changed-dirs }} |
+          echo "::set-output name=passed::$(go test ${{ steps.dirs.outputs.changed-dirs }} |
           grep '^ok' | cut -d '	' -f 2 |
-          tr '\n' ' ' | sed 's/\s$/\n/')
-          echo "::set-output name=passed::$PASSED"
-          echo "$PASSED"
+          tr '\n' ' ' | sed 's/\s$/\n/')"
       - name: Print passed tests
         run: |
-          echo "${{ steps.run-go-tests.passed }} |
+          echo "${{ steps.run-go-tests.outputs.passed }} |
           tr ' ' '\n'"
