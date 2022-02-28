@@ -10,9 +10,21 @@ jobs:
   get-task-data:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+    - name: Setup python environment
+      uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
     - name: Get task data
-      uses: ./.github/actions/update_tasks
+      run: |
+        apt-get update && \
+        apt-get install -y --no-install-recommends \
+        pandoc
+        pip install --upgrade pip && \
+        pip install -r requirements.txt
+        python tasks.py
     - name: Commit README.md
       run: |
         git config --local core.autocrlf false
