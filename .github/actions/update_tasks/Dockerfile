@@ -1,4 +1,4 @@
-FROM python:3.9-slim as builder
+FROM cicirello/pyaction:latest as builder
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -15,7 +15,7 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 
-FROM python:3.9-slim
+FROM cicirello/pyaction:latest
 
 COPY --from=builder /opt/venv /opt/venv
 
@@ -23,14 +23,10 @@ WORKDIR /github/workspace/
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        git \
-        pandoc \
-        tree
+        # git \
+        pandoc
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-ADD tasks.py /github/workspace/
-RUN chmod +x tasks.py && \
-    pwd && \
-    ls -lA
-ENTRYPOINT [ "python", "/github/workspace/tasks.py" ]
+COPY . .
+ENTRYPOINT [ "python", "tasks.py" ]
