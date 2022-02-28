@@ -20,7 +20,8 @@ jobs:
         python-version: '3.x'
         architecture: 'x64'
         cache: 'pip'
-    - run: pip install -r requirements.txt
+    - name: Install python dependencies
+      run: pip install -r requirements.txt
     - name: Setup pandoc
       uses: r-lib/actions/setup-pandoc@v1
     - name: Get task data
