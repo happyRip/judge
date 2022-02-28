@@ -5,6 +5,10 @@ inputs:
     descritpion: Root path of composite action folder
     required: false
     default: .github/actions/update_tasks
+outputs:
+  script-folder:
+    descritpion: Folder in which `tasks.py` script is located.
+    value: ${{ inputs.action-root-folder }}
 runs:
   using: "composite"
   steps:
@@ -19,5 +23,3 @@ runs:
       shell: bash
     - name: Setup pandoc
       uses: r-lib/actions/setup-pandoc@v1
-    - run: ln -s $ACTION_FOLDER/tasks.py .
-      shell: bash

@@ -15,9 +15,10 @@ jobs:
       with:
         ref: ${{ github.ref }}
     - name: Setup environment
+      id: setup-environment
       uses: ./.github/actions/update_tasks/prepare_environment
     - name: Get task data
-      run: python tasks.py
+      run: python ${{ steps.setup-environment.outputs.script-folder }}/tasks.py
     - name: Commit README.md
       run: |
         git config --local core.autocrlf false
