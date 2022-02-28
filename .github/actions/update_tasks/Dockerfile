@@ -1,7 +1,5 @@
 FROM python:3.9-slim as builder
 
-WORKDIR /app
-
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -21,7 +19,7 @@ FROM python:3.9-slim
 
 COPY --from=builder /opt/venv /opt/venv
 
-WORKDIR /app
+WORKDIR /github/workspace/
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git pandoc tree
@@ -30,4 +28,4 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
 RUN pwd && ls -A && tree 
-ENTRYPOINT [ "tasks.py" ]
+ENTRYPOINT [ "python", "tasks.py" ]
