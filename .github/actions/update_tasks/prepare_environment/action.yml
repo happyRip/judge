@@ -7,7 +7,7 @@ inputs:
     default: .github/actions/update_tasks
 outputs:
   script-folder:
-    descritpion: Folder in which `tasks.py` script is located.
+    description: Folder in which `tasks.py` script is located.
     value: ${{ inputs.action-root-folder }}
 runs:
   using: "composite"
