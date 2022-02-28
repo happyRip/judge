@@ -1,0 +1,28 @@
+name: Update tasks data
+on:
+  push:
+    paths:
+      - '**.md'
+      - '.github/workflows/update_tasks.yml'
+      - '.github/actions/update_tasks/**'
+
+jobs:
+  get-task-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+    - name: Setup environment
+      id: setup-environment
+      uses: ./.github/actions/update_tasks/prepare_environment
+    - name: Get task data
+      run: python ${{ steps.setup-environment.outputs.script-folder }}/tasks.py
+    - name: Commit README.md
+      uses: ./.github/actions/update_tasks/commit_readme
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: ${{ github.ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}

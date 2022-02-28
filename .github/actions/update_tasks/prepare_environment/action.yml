@@ -1,0 +1,25 @@
+name: Prepare environment
+desctiption: Prepare environment for `update_tasks.yml` workflow.
+inputs:
+  action-root-folder:
+    descritpion: Root path of composite action folder
+    required: false
+    default: .github/actions/update_tasks
+outputs:
+  script-folder:
+    description: Folder in which `tasks.py` script is located.
+    value: ${{ inputs.action-root-folder }}
+runs:
+  using: "composite"
+  steps:
+    - name: Setup python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+        cache: 'pip'
+    - name: Install python dependencies
+      run: pip install -r ${{ inputs.action-root-folder }}/requirements.txt
+      shell: bash
+    - name: Setup pandoc
+      uses: r-lib/actions/setup-pandoc@v1

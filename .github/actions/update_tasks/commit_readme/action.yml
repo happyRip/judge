@@ -1,0 +1,15 @@
+name: Commit readme
+desctiption: Commit `README.md` modified with `tasks.py` script to current branch.
+runs:
+  using: "composite"
+  steps:
+    - name: Commit README.md
+      run: |
+        git config --local core.autocrlf false
+        git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+        git config --local user.name "${{ github.actor }}"
+        git add README.md && git add --renormalize README.md
+        git pull origin ${{ github.ref }} --autostash --rebase -X ours
+        git commit --allow-empty -am "AUTO-GH ACTION: ${{ github.workflow }}"
+        NO_PAGER=1 git --no-pager diff HEAD^
+      shell: bash
