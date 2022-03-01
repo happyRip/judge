@@ -58,10 +58,12 @@ jobs:
           go mod tidy
           echo "::set-output name=passed::$(go test ${{ steps.dirs.outputs.changed-dirs }} |
           grep '^ok' | cut -d '	' -f 2 |
+          sed 's:^judge/::' |
           tr '\n' ' ' | sed 's/\s$/\n/')"
       - name: Print passed tests
         run: |
           echo "passed: ${{ steps.run-go-tests.outputs.passed }}" |
-          tr ' ' '\n\t'
+          tr ' ' '\n'
           echo "changed: ${{ needs.list-changed-files.outputs.changed-files }}" |
-          tr ' ' '\n\t'
+          tr ' ' '\n' |
+          rev | cut -d '/' -f 2- | rev | 
