@@ -66,4 +66,4 @@ jobs:
           tr ' ' '\n'
           echo "changed: ${{ needs.list-changed-files.outputs.changed-files }}" |
           tr ' ' '\n' |
-          rev | cut -d '/' -f 2- | rev | 
+          rev | cut -d '/' -f 2- | rev
