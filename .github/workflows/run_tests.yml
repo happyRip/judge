@@ -61,7 +61,7 @@ jobs:
           tr '\n' ' ' | sed 's/\s$/\n/')"
       - name: Print passed tests
         run: |
-          echo "passed:\n${{ steps.run-go-tests.outputs.passed }}" |
-          tr ' ' '\n'
-          echo "changed:\n${{ needs.list-changed-files.outputs.changed-files }}" |
-          tr ' ' '\n'
+          echo "passed: ${{ steps.run-go-tests.outputs.passed }}" |
+          tr ' ' '\n\t'
+          echo "changed: ${{ needs.list-changed-files.outputs.changed-files }}" |
+          tr ' ' '\n\t'
