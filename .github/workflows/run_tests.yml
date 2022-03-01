@@ -66,4 +66,5 @@ jobs:
           tr ' ' '\n'
           echo "changed: ${{ needs.list-changed-files.outputs.changed-files }}" |
           tr ' ' '\n' |
+          grep '\.go$' |
           rev | cut -d '/' -f 2- | rev
